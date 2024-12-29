@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://vchkgdw3xg31"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_xwald"]
+[ext_resource type="Texture2D" uid="uid://dugcp46xb7pmc" path="res://bar.png" id="2_63ohk"]
+[ext_resource type="Texture2D" uid="uid://l53m3fo11lkk" path="res://pong.png" id="3_8j8gc"]
+
+[sub_resource type="Gradient" id="Gradient_bvm1o"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hb0ds"]
+gradient = SubResource("Gradient_bvm1o")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dogxf"]
+size = Vector2(20, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxlk0"]
+size = Vector2(1106, 534)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1151.0
+offset_bottom = 650.0
+texture = SubResource("GradientTexture1D_hb0ds")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_xwald")
+
+[node name="Bar" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(53, 355)
+texture = ExtResource("2_63ohk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visible = false
+position = Vector2(53, 355)
+shape = SubResource("RectangleShape2D_dogxf")
+
+[node name="Pong" type="Sprite2D" parent="."]
+position = Vector2(591, 601)
+texture = ExtResource("3_8j8gc")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(571, 283)
+shape = SubResource("RectangleShape2D_qxlk0")
