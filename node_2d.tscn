@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://vchkgdw3xg31"]
+[gd_scene load_steps=8 format=3 uid="uid://vchkgdw3xg31"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_xwald"]
 [ext_resource type="Texture2D" uid="uid://dugcp46xb7pmc" path="res://bar.png" id="2_63ohk"]
@@ -12,6 +12,9 @@ colors = PackedColorArray(0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_hb0ds"]
 gradient = SubResource("Gradient_bvm1o")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_opudr"]
+size = Vector2(16, 90)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -20,12 +23,18 @@ offset_bottom = 360.0
 texture = SubResource("GradientTexture1D_hb0ds")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(67, 118)
 script = ExtResource("1_xwald")
 
 [node name="Bar" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(35, 180)
+position = Vector2(-43, 40)
 scale = Vector2(0.4, 0.5)
 texture = ExtResource("2_63ohk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visible = false
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_opudr")
 
 [node name="Pong" type="Sprite2D" parent="."]
 position = Vector2(320, 316)

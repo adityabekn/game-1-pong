@@ -10,4 +10,4 @@ func _process(delta: float):
 			
 	if Input.is_action_pressed("ui_down"):
 		print("Down")
-		direction = -1;
+		direction = -1;	
