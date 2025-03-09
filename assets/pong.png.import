@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xsuyic00yeue"
-path="res://.godot/imported/line.png-e86270f75d5b95d6fc8473dba8c1eec6.ctex"
+uid="uid://l53m3fo11lkk"
+path="res://.godot/imported/pong.png-63b8b9577147351440786ee808d84490.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://line.png"
-dest_files=["res://.godot/imported/line.png-e86270f75d5b95d6fc8473dba8c1eec6.ctex"]
+source_file="res://assets/pong.png"
+dest_files=["res://.godot/imported/pong.png-63b8b9577147351440786ee808d84490.ctex"]
 
 [params]
 
