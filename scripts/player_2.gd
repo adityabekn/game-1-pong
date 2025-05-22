@@ -6,8 +6,8 @@ extends CharacterBody2D
 @onready var ball = get_node("%Bola")
 
 func _physics_process(delta: float) -> void:
+	return
 	if ball:
-		# Only move if the ball is sufficiently far from the paddle
 		var distance = ball.position.y - position.y
 		if abs(distance) > dead_zone:
 			var direction = sign(distance)

@@ -1,20 +1,26 @@
 extends CharacterBody2D
 
-@export var speed: float = 400.0
+@export var speed: float = 5000.0
 
 var can_move: bool     = false
 var direction: Vector2 = Vector2(-1, 0)
 
+@onready var timer = get_node("%StartDelayTimer")
+@onready var goal_area = get_node("%Goal")
+@onready var goal_area_2 = get_node("%Goal2")
+
 func _ready():
 	# Give the ball an initial random angle
 	randomize()
-	var timer = get_node("%StartDelayTimer")
 	timer.timeout.connect(_on_timer_timeout)
+	goal_area.ball_hit_score.connect(reset_ball)
+	goal_area_2.ball_hit_score.connect(reset_ball)
+	timer.start()
 
 func _physics_process(delta):
 	if !can_move:
 		return
-	
+
 	# Update velocity
 	velocity = direction * speed
 
@@ -29,15 +35,17 @@ func _physics_process(delta):
 		speed *= 1.01
 
 func reset_ball():
-	# Reset ball position to center
-	position = Vector2(0, 0)
+	can_move = false
+	position = Vector2(320, 176)
 
 	# Reset direction (randomly choose left or right)
 	direction = Vector2([-1, 1].pick_random(), 0)
 	direction = direction.rotated(randf_range(-PI/4, PI/4))
 
 	# Reset speed to initial value
-	speed = 400
+	speed = 5000
+	
+	timer.start()
 
 func _on_timer_timeout():
 	can_move = true
