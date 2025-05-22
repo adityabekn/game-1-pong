@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var SPEED: float = 300.0
+@export var speed: float = 300.0
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = Vector2.ZERO
@@ -12,7 +12,7 @@ func _physics_process(delta: float) -> void:
 		direction.y = 1
 
 	# Set the velocity
-	velocity = direction * SPEED
+	velocity = direction * speed
 
 	# Move and slide will handle the movement and collision
 	move_and_slide()

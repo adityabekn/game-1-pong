@@ -1,8 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://vchkgdw3xg31"]
+[gd_scene load_steps=14 format=3 uid="uid://vchkgdw3xg31"]
 
-[ext_resource type="Script" path="res://scripts/character_body_2d.gd" id="1_xwald"]
+[ext_resource type="Script" uid="uid://dpip3dktscm3c" path="res://scripts/player_script.gd" id="1_q6r6c"]
 [ext_resource type="Texture2D" uid="uid://dugcp46xb7pmc" path="res://assets/bar.png" id="2_63ohk"]
 [ext_resource type="Texture2D" uid="uid://l53m3fo11lkk" path="res://assets/pong.png" id="3_8j8gc"]
+[ext_resource type="Texture2D" uid="uid://cvyvyj2f75ds5" path="res://assets/Sprite-0001.png" id="4_0hol4"]
+[ext_resource type="Script" uid="uid://0t5ypuxmt0es" path="res://scripts/bola.gd" id="4_kdubu"]
+[ext_resource type="Script" uid="uid://dg4e5s40hob8y" path="res://scripts/player_2.gd" id="6_kdubu"]
+[ext_resource type="Script" uid="uid://b3vhur5a6blih" path="res://Score.gd" id="7_d21ai"]
 
 [sub_resource type="Gradient" id="Gradient_bvm1o"]
 offsets = PackedFloat32Array(1)
@@ -15,24 +19,30 @@ gradient = SubResource("Gradient_bvm1o")
 size = Vector2(10, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iyiau"]
-size = Vector2(30.0028, 12.8571)
+size = Vector2(30.0028, 13.0612)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj586"]
+size = Vector2(9, 336)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 630.0
+offset_right = 640.0
 offset_bottom = 360.0
 texture = SubResource("GradientTexture1D_hb0ds")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(35, 180)
-script = ExtResource("1_xwald")
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(32, 180)
+script = ExtResource("1_q6r6c")
 
-[node name="Bar" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Bar" type="Sprite2D" parent="Player"]
 scale = Vector2(0.5, 0.6)
 texture = ExtResource("2_63ohk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_fa8in")
 
 [node name="Pong" type="Sprite2D" parent="."]
@@ -41,33 +51,81 @@ position = Vector2(320, 316)
 scale = Vector2(1.1, 0.9)
 texture = ExtResource("3_8j8gc")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Arena 1" type="StaticBody2D" parent="."]
 position = Vector2(315, 6)
 rotation = 1.5708
 scale = Vector2(0.4, 7)
 
-[node name="Bar2" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(1.5, 1)
+[node name="Bar2" type="Sprite2D" parent="Arena 1"]
+position = Vector2(0, -0.714529)
+scale = Vector2(1.5, 1.01588)
 texture = ExtResource("2_63ohk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena 1"]
+position = Vector2(0, -0.714359)
 scale = Vector2(1, 7)
 shape = SubResource("RectangleShape2D_iyiau")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="Arena 2" type="StaticBody2D" parent="."]
 position = Vector2(315, 353)
 rotation = 1.5708
 scale = Vector2(0.4, 7)
 
-[node name="Bar2" type="Sprite2D" parent="StaticBody2D2"]
-scale = Vector2(1.5, 1)
+[node name="Bar2" type="Sprite2D" parent="Arena 2"]
+position = Vector2(2.5, -0.712508)
+scale = Vector2(1.498, 1.01583)
 texture = ExtResource("2_63ohk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena 2"]
+position = Vector2(2.49995, -0.714286)
 scale = Vector2(1, 7)
 shape = SubResource("RectangleShape2D_iyiau")
 
-[node name="Bar" type="Sprite2D" parent="."]
-position = Vector2(601, 180)
-scale = Vector2(0.4, 0.5)
+[node name="Bola" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(320, 176)
+script = ExtResource("4_kdubu")
+speed = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Bola"]
+texture_filter = 2
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_0hol4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bola"]
+shape = SubResource("CircleShape2D_0hol4")
+
+[node name="Player2" type="CharacterBody2D" parent="."]
+position = Vector2(606, 180)
+script = ExtResource("6_kdubu")
+
+[node name="Bar" type="Sprite2D" parent="Player2"]
+scale = Vector2(0.5, 0.6)
 texture = ExtResource("2_63ohk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+shape = SubResource("RectangleShape2D_fa8in")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(318, 64)
+script = ExtResource("7_d21ai")
+
+[node name="Score Label" type="Label" parent="Area2D"]
+offset_left = -28.0
+offset_top = -18.0
+offset_right = 25.0
+offset_bottom = 5.0
+scale = Vector2(1.1053, 1.4919)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-316, 116)
+shape = SubResource("RectangleShape2D_rj586")
+
+[node name="StartDelayTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+autostart = true
