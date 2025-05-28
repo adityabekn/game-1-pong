@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
-@export var speed: float = 5000.0
+@export var speed: float = 300
 
 var can_move: bool     = false
 var direction: Vector2 = Vector2(-1, 0)
 
-@onready var timer = get_node("%StartDelayTimer")
-@onready var goal_area = get_node("%Goal")
-@onready var goal_area_2 = get_node("%Goal2")
+@onready var timer: Node = get_node("%StartDelayTimer")
+@onready var goal_area: Node = get_node("%LeftGoal")
+@onready var goal_area_2: Node = get_node("%RightGoal")
 
 func _ready():
 	# Give the ball an initial random angle
@@ -43,8 +43,8 @@ func reset_ball():
 	direction = direction.rotated(randf_range(-PI/4, PI/4))
 
 	# Reset speed to initial value
-	speed = 5000
-	
+	speed = 300
+
 	timer.start()
 
 func _on_timer_timeout():

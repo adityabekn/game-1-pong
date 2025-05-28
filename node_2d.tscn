@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://vchkgdw3xg31"]
+[gd_scene load_steps=17 format=3 uid="uid://vchkgdw3xg31"]
 
 [ext_resource type="Script" uid="uid://dpip3dktscm3c" path="res://scripts/player.gd" id="1_q6r6c"]
 [ext_resource type="Texture2D" uid="uid://dugcp46xb7pmc" path="res://assets/bar.png" id="2_63ohk"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://0t5ypuxmt0es" path="res://scripts/bola.gd" id="4_kdubu"]
 [ext_resource type="Script" uid="uid://dg4e5s40hob8y" path="res://scripts/player_2.gd" id="6_kdubu"]
 [ext_resource type="Script" uid="uid://b3vhur5a6blih" path="res://scripts/goal_1.gd" id="7_d21ai"]
+[ext_resource type="FontFile" uid="uid://c3xkysj0bpm72" path="res://assets/Minecraft.ttf" id="7_ir8iy"]
+[ext_resource type="Script" uid="uid://011hay5j6ki1" path="res://scripts/scoreboard_system.gd" id="8_ir8iy"]
 [ext_resource type="Script" uid="uid://d0ll0veomimsv" path="res://scripts/goal_2.gd" id="8_rj586"]
 
 [sub_resource type="Gradient" id="Gradient_bvm1o"]
@@ -46,12 +48,6 @@ texture = ExtResource("2_63ohk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_fa8in")
 
-[node name="Pong" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(320, 313)
-scale = Vector2(1.1, 0.9)
-texture = ExtResource("3_8j8gc")
-
 [node name="Arena 1" type="StaticBody2D" parent="."]
 position = Vector2(315, 6)
 rotation = 1.5708
@@ -84,7 +80,7 @@ shape = SubResource("RectangleShape2D_iyiau")
 
 [node name="Bola" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(320, 177)
+position = Vector2(320, 180)
 script = ExtResource("4_kdubu")
 
 [node name="Sprite2D" type="Sprite2D" parent="Bola"]
@@ -106,25 +102,75 @@ texture = ExtResource("2_63ohk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
 shape = SubResource("RectangleShape2D_fa8in")
 
-[node name="Goal" type="Area2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(318, 63)
-script = ExtResource("7_d21ai")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
-position = Vector2(-378, 116)
-shape = SubResource("RectangleShape2D_rj586")
-
 [node name="StartDelayTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 
-[node name="Goal2" type="Area2D" parent="."]
+[node name="ScoreboardUI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Player1Score" type="Label" parent="ScoreboardUI"]
+offset_left = 256.0
+offset_top = 33.0
+offset_right = 296.0
+offset_bottom = 81.0
+theme_override_fonts/font = ExtResource("7_ir8iy")
+theme_override_font_sizes/font_size = 42
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Player2Score" type="Label" parent="ScoreboardUI"]
+offset_left = 345.0
+offset_top = 33.0
+offset_right = 385.0
+offset_bottom = 81.0
+theme_override_fonts/font = ExtResource("7_ir8iy")
+theme_override_font_sizes/font_size = 42
+text = "0"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ScoreboardUI"]
+offset_left = 301.0
+offset_top = 30.0
+offset_right = 341.0
+offset_bottom = 78.0
+theme_override_fonts/font = ExtResource("7_ir8iy")
+theme_override_font_sizes/font_size = 42
+text = ":"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Goal" type="Node" parent="."]
+script = ExtResource("8_ir8iy")
+
+[node name="Pong" type="Sprite2D" parent="Goal"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(320, 288)
+scale = Vector2(1.1, 0.9)
+texture = ExtResource("3_8j8gc")
+
+[node name="ScoredTimer" type="Timer" parent="Goal"]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="LeftGoal" type="Area2D" parent="Goal"]
+unique_name_in_owner = true
+position = Vector2(318, 63)
+script = ExtResource("7_d21ai")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal/LeftGoal"]
+position = Vector2(-378, 116)
+shape = SubResource("RectangleShape2D_rj586")
+
+[node name="RightGoal" type="Area2D" parent="Goal"]
 unique_name_in_owner = true
 position = Vector2(636, 126)
 script = ExtResource("8_rj586")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal/RightGoal"]
 position = Vector2(64, 54)
 shape = SubResource("RectangleShape2D_rj586")

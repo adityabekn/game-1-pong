@@ -15,4 +15,4 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 
 	# Move and slide will handle the movement and collision
-	move_and_slide()
+	move_and_collide(velocity * delta)
